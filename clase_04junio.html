@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 4 de Junio — Formación Socioemocional</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --azul:    #1d3a8a;
+  --azul2:   #3b66d0;
+  --cielo:   #dbeafe;
+  --rosa:    #be185d;
+  --rosa2:   #ec4899;
+  --rosita:  #fce7f3;
+  --verde:   #065f46;
+  --verde2:  #10b981;
+  --menta:   #d1fae5;
+  --ambar:   #92400e;
+  --ambar2:  #f59e0b;
+  --cremita: #fffbeb;
+  --negro:   #0f172a;
+  --gris:    #64748b;
+  --fondo:   #f8fafc;
+  --blanco:  #ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--fondo);color:var(--negro);min-height:100vh;padding-bottom:5rem}
+
+/* ── HEADER ── */
+.header{
+  background:var(--negro);
+  padding:2.5rem 1.5rem 0;
+  position:relative;
+  overflow:hidden;
+}
+.header::after{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 15% 80%,rgba(59,102,208,.3) 0%,transparent 50%),
+    radial-gradient(circle at 85% 20%,rgba(190,24,93,.25) 0%,transparent 50%),
+    radial-gradient(circle at 50% 50%,rgba(16,185,129,.1) 0%,transparent 60%);
+  pointer-events:none;
+}
+.header-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
+.date-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.15);
+  color:rgba(255,255,255,.8);
+  font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:.35rem .9rem;border-radius:2rem;margin-bottom:1rem;
+}
+.header h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.9rem,5vw,3rem);
+  font-weight:900;color:var(--blanco);
+  line-height:1.1;margin-bottom:.4rem;
+}
+.header h1 em{font-style:normal;color:#f59e0b}
+.header p{font-size:.9rem;color:rgba(255,255,255,.55);margin-bottom:1.5rem}
+
+/* ── TABS ── */
+.tabs{
+  display:flex;gap:0;
+  border-bottom:0;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  position:relative;z-index:1;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  padding:.75rem 1.2rem;
+  border:none;background:transparent;
+  color:rgba(255,255,255,.5);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.82rem;font-weight:600;
+  cursor:pointer;white-space:nowrap;
+  border-bottom:3px solid transparent;
+  transition:all .2s;flex-shrink:0;
+}
+.tab:hover{color:rgba(255,255,255,.85)}
+.tab.active{color:var(--blanco)}
+.tab[data-t="rel"].active{border-color:#3b66d0}
+.tab[data-t="dep"].active{border-color:#10b981}
+.tab[data-t="arte"].active{border-color:#ec4899}
+.tab[data-t="act"].active{border-color:#f59e0b}
+
+/* ── SECTIONS ── */
+.sec{display:none;animation:up .35s ease}
+.sec.on{display:block}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.wrap{max-width:860px;margin:0 auto;padding:2rem 1.2rem}
+
+/* ── SECTION INTRO ── */
+.sec-intro{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1.4rem;border-radius:1rem;margin-bottom:1.8rem;
+}
+.sec-intro.azul{background:linear-gradient(135deg,#eff6ff,var(--cielo));border-left:4px solid var(--azul2)}
+.sec-intro.verde{background:linear-gradient(135deg,#f0fdf4,var(--menta));border-left:4px solid var(--verde2)}
+.sec-intro.rosa{background:linear-gradient(135deg,#fdf2f8,var(--rosita));border-left:4px solid var(--rosa2)}
+.sec-intro.ambar{background:linear-gradient(135deg,var(--cremita),#fef3c7);border-left:4px solid var(--ambar2)}
+.sec-intro .ico{font-size:2.2rem;flex-shrink:0}
+.sec-intro strong{display:block;font-weight:700;font-size:1rem;margin-bottom:.3rem}
+.sec-intro p{font-size:.875rem;color:var(--gris);line-height:1.65}
+
+/* ── HEADINGS ── */
+h2.sh{
+  font-family:'Fraunces',serif;
+  font-size:1.35rem;font-weight:700;
+  margin:1.6rem 0 .9rem;color:var(--negro);
+}
+h2.sh span{display:inline-block;width:6px;height:22px;border-radius:3px;margin-right:.5rem;vertical-align:middle}
+h2.sh span.azul{background:var(--azul2)}
+h2.sh span.verde{background:var(--verde2)}
+h2.sh span.rosa{background:var(--rosa2)}
+h2.sh span.ambar{background:var(--ambar2)}
+
+/* ── GRID CARDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.4rem}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.4rem}
+@media(max-width:580px){.g2,.g3{grid-template-columns:1fr}}
+
+.card{
+  background:var(--blanco);border-radius:.9rem;padding:1.2rem;
+  border:1px solid rgba(0,0,0,.07);
+  box-shadow:0 1px 8px rgba(0,0,0,.05);
+  transition:transform .2s,box-shadow .2s;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 5px 18px rgba(0,0,0,.1)}
+.card .ci{font-size:1.5rem;margin-bottom:.6rem}
+.card h3{font-size:.95rem;font-weight:700;margin-bottom:.35rem}
+.card p{font-size:.83rem;color:var(--gris);line-height:1.6}
+.card.ca{border-top:3px solid var(--azul2)}
+.card.cv{border-top:3px solid var(--verde2)}
+.card.cr{border-top:3px solid var(--rosa2)}
+.card.cam{border-top:3px solid var(--ambar2)}
+
+/* ── LIST ── */
+.lst{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.4rem}
+.lst li{
+  background:var(--blanco);border-radius:.75rem;
+  padding:.75rem 1rem;display:flex;gap:.75rem;align-items:flex-start;
+  font-size:.875rem;border:1px solid rgba(0,0,0,.06);
+}
+.num{
+  min-width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;font-weight:700;color:var(--blanco);flex-shrink:0;margin-top:.1rem;
+}
+.na{background:var(--azul2)}.nv{background:var(--verde2)}
+.nr{background:var(--rosa2)}.nam{background:var(--ambar2)}
+
+/* ── HIGHLIGHT BOX ── */
+.hbox{
+  border-radius:.9rem;padding:1.1rem 1.3rem;margin-bottom:1.4rem;
+  font-size:.875rem;line-height:1.7;
+}
+.hbox.azul{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a}
+.hbox.verde{background:#f0fdf4;border:1px solid #a7f3d0;color:#065f46}
+.hbox.rosa{background:#fdf2f8;border:1px solid #f9a8d4;color:#9d174d}
+.hbox.ambar{background:var(--cremita);border:1px solid #fcd34d;color:#78350f}
+
+/* ── TIPO RELACIONES TABLE ── */
+.rel-table{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.4rem}
+.rel-row{
+  display:grid;grid-template-columns:1fr 2fr;gap:.8rem;align-items:center;
+  background:var(--blanco);border-radius:.75rem;padding:.8rem 1rem;
+  border:1px solid rgba(0,0,0,.07);font-size:.86rem;
+}
+.rel-row .tipo{font-weight:700;color:var(--azul)}
+.rel-row p{color:var(--gris)}
+
+/* ── PROGRESS STEPS ── */
+.steps-h{display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.4rem}
+.step-h{
+  display:flex;gap:.9rem;align-items:flex-start;
+  background:var(--blanco);border-radius:.75rem;padding:.85rem 1rem;
+  border:1px solid rgba(0,0,0,.07);font-size:.875rem;
+}
+.snum{
+  min-width:30px;height:30px;border-radius:.5rem;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.85rem;color:var(--blanco);flex-shrink:0;
+}
+.sa{background:var(--azul2)}.sv{background:var(--verde2)}
+.sr{background:var(--rosa2)}.sam{background:var(--ambar2)}
+
+/* ── ACTIVIDAD ── */
+.act-shell{border-radius:1.1rem;overflow:hidden;margin-bottom:1.4rem;box-shadow:0 2px 16px rgba(0,0,0,.08)}
+.act-top{
+  background:linear-gradient(135deg,#92400e,#f59e0b);
+  color:var(--blanco);padding:1.4rem 1.6rem;text-align:center;
+}
+.act-top h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900}
+.act-top p{font-size:.85rem;opacity:.85;margin-top:.3rem}
+.act-body{background:var(--blanco);padding:1.5rem}
+
+.paso{
+  border-radius:.85rem;padding:1.1rem;margin-bottom:.9rem;
+}
+.paso.p1{background:#eff6ff;border-left:4px solid var(--azul2)}
+.paso.p2{background:#f0fdf4;border-left:4px solid var(--verde2)}
+.paso.p3{background:#fdf2f8;border-left:4px solid var(--rosa2)}
+.paso.p4{background:var(--cremita);border-left:4px solid var(--ambar2)}
+.paso h3{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.95rem;font-weight:700;margin-bottom:.6rem;
+}
+.paso h3 .badge{
+  font-size:.72rem;font-weight:700;
+  padding:.2rem .55rem;border-radius:2rem;color:var(--blanco);
+}
+.paso p,.paso li{font-size:.875rem;color:var(--gris);line-height:1.65}
+.paso ul{margin-left:1rem;display:flex;flex-direction:column;gap:.3rem}
+
+.chips-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:.7rem 0}
+.chip{
+  padding:.3rem .8rem;border-radius:2rem;font-size:.8rem;font-weight:600;
+  border:1px solid;
+}
+.chip.a{background:#dbeafe;color:var(--azul);border-color:#93c5fd}
+.chip.v{background:var(--menta);color:var(--verde);border-color:#6ee7b7}
+.chip.r{background:var(--rosita);color:var(--rosa);border-color:#f9a8d4}
+.chip.am{background:#fef3c7;color:var(--ambar);border-color:#fcd34d}
+
+/* ── INTERACTIVE CHECK ── */
+.cklist{list-style:none;display:flex;flex-direction:column;gap:.45rem;margin-top:1rem}
+.ckitem{
+  display:flex;gap:.7rem;align-items:center;
+  background:#f8fafc;border-radius:.6rem;padding:.65rem .9rem;
+  cursor:pointer;font-size:.855rem;border:1px solid #e2e8f0;
+  transition:background .15s;user-select:none;
+}
+.ckitem:hover{background:#f1f5f9}
+.ckitem.done{background:#f0fdf4;border-color:#a7f3d0;color:var(--gris);text-decoration:line-through}
+.ckb{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid #cbd5e1;display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;color:transparent;flex-shrink:0;transition:all .2s;
+}
+.ckitem.done .ckb{background:var(--verde2);border-color:var(--verde2);color:var(--blanco)}
+
+/* ── BOTTOM NAV ── */
+.bnav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
+  border-top:1px solid #e2e8f0;
+  display:flex;justify-content:center;gap:.5rem;padding:.7rem 1rem;
+  z-index:99;flex-wrap:wrap;
+}
+.bn{
+  padding:.45rem 1rem;border-radius:2rem;
+  border:1.5px solid;font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:.78rem;font-weight:700;cursor:pointer;transition:all .2s;
+}
+.bn.a{background:#eff6ff;color:var(--azul);border-color:#bfdbfe}
+.bn.v{background:#f0fdf4;color:var(--verde);border-color:#a7f3d0}
+.bn.r{background:var(--rosita);color:var(--rosa);border-color:#f9a8d4}
+.bn.am{background:var(--cremita);color:var(--ambar);border-color:#fcd34d}
+.bn:hover{filter:brightness(.93);transform:translateY(-1px)}
+
+/* ── EMOTION WHEEL (simple) ── */
+.emo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin:.8rem 0 1.2rem}
+@media(max-width:400px){.emo-grid{grid-template-columns:repeat(3,1fr)}}
+.emo{
+  background:var(--blanco);border-radius:.7rem;padding:.6rem .4rem;
+  text-align:center;font-size:.78rem;border:1px solid rgba(0,0,0,.07);
+  cursor:pointer;transition:all .2s;
+}
+.emo:hover{transform:scale(1.06)}
+.emo.sel{border-width:2px;font-weight:700}
+.emo .em{font-size:1.4rem;display:block;margin-bottom:.2rem}
+.emo.alegria.sel{border-color:#f59e0b;background:#fffbeb;color:#78350f}
+.emo.calma.sel{border-color:#3b66d0;background:#eff6ff;color:#1e3a8a}
+.emo.triste.sel{border-color:#6366f1;background:#eef2ff;color:#3730a3}
+.emo.enojo.sel{border-color:#ef4444;background:#fef2f2;color:#7f1d1d}
+.emo.miedo.sel{border-color:#8b5cf6;background:#f5f3ff;color:#4c1d95}
+.emo.sorpresa.sel{border-color:#ec4899;background:var(--rosita);color:#9d174d}
+.emo.asco.sel{border-color:#10b981;background:var(--menta);color:#065f46}
+.emo.confusion.sel{border-color:#64748b;background:#f1f5f9;color:#0f172a}
+
+#emo-msg{
+  font-size:.85rem;color:var(--gris);text-align:center;
+  padding:.6rem;border-radius:.6rem;background:var(--fondo);
+  min-height:2.2rem;transition:all .2s;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="date-badge">📅 4 de Junio · Tercer Parcial · Clase 3</div>
+    <h1>Formación <em>Socioemocional</em></h1>
+    <p>Relaciones Interpersonales · Deporte y Emociones · Arte y Autodescubrimiento</p>
+    <div class="tabs">
+      <button class="tab active" data-t="rel">💬 Relaciones</button>
+      <button class="tab" data-t="dep">⚽ Deporte</button>
+      <button class="tab" data-t="arte">🎨 Arte</button>
+      <button class="tab" data-t="act">✏️ Actividad</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TAB 1 — RELACIONES INTERPERSONALES
+══════════════════════════════════════ -->
+<div class="sec on" id="s-rel">
+<div class="wrap">
+
+  <div class="sec-intro azul">
+    <div class="ico">💬</div>
+    <div>
+      <strong>Relaciones Interpersonales Saludables</strong>
+      <p>Las relaciones que establecemos impactan directamente en nuestro bienestar físico, mental y emocional. Aprender a gestionarlas es una habilidad esencial para la vida.</p>
+    </div>
+  </div>
+
+  <h2 class="sh"><span class="azul"></span>¿Qué son las relaciones interpersonales?</h2>
+  <div class="hbox azul">
+    Son los vínculos que establecemos con otras personas en distintos contextos — familia, escuela, trabajo, comunidad. La calidad de estas relaciones define en gran medida nuestra salud emocional y social.
+  </div>
+
+  <h2 class="sh"><span class="azul"></span>Tipos de relaciones</h2>
+  <div class="rel-table">
+    <div class="rel-row"><div class="tipo">👨‍👩‍👧 Familiares</div><p>Primer círculo de socialización. Influyen en la formación de valores y la autoestima.</p></div>
+    <div class="rel-row"><div class="tipo">🤝 Amistades</div><p>Vínculos elegidos por afinidad. Dan sentido de pertenencia y apoyo emocional.</p></div>
+    <div class="rel-row"><div class="tipo">🏫 Escolares</div><p>Compañeros, maestros, tutores. Espacio clave de aprendizaje social.</p></div>
+    <div class="rel-row"><div class="tipo">❤️ Afectivas/románticas</div><p>Relaciones de pareja. Requieren comunicación, respeto y límites claros.</p></div>
+    <div class="rel-row"><div class="tipo">🌐 Sociales/virtuales</div><p>Comunidad, redes sociales. Pueden ser fuente de apoyo o de riesgo según cómo se gestionen.</p></div>
+  </div>
+
+  <h2 class="sh"><span class="azul"></span>Características de una relación saludable</h2>
+  <div class="g2">
+    <div class="card ca"><div class="ci">🗣️</div><h3>Comunicación asertiva</h3><p>Expresar ideas y sentimientos con claridad y respeto, sin agredir ni someterse.</p></div>
+    <div class="card ca"><div class="ci">👂</div><h3>Escucha activa</h3><p>Prestar atención real a lo que el otro dice — sin interrumpir ni juzgar.</p></div>
+    <div class="card ca"><div class="ci">🔒</div><h3>Límites claros</h3><p>Conocer y respetar los propios límites y los de los demás.</p></div>
+    <div class="card ca"><div class="ci">⚖️</div><h3>Reciprocidad</h3><p>Las relaciones sanas son de ida y vuelta — no hay desequilibrios de poder ni dependencia.</p></div>
+  </div>
+
+  <h2 class="sh"><span class="azul"></span>Señales de alerta — relaciones no saludables</h2>
+  <ul class="lst">
+    <li><div class="num na">!</div><div><strong>Control y manipulación:</strong> una persona toma decisiones por la otra o la aísla de sus redes de apoyo.</div></li>
+    <li><div class="num na">!</div><div><strong>Violencia:</strong> física, verbal, emocional o digital. Ningún tipo de violencia es aceptable en una relación.</div></li>
+    <li><div class="num na">!</div><div><strong>Falta de respeto:</strong> burlas, insultos o desprecio constante hacia la otra persona.</div></li>
+    <li><div class="num na">!</div><div><strong>Desigualdad:</strong> cuando una persona da todo y la otra no aporta ni reconoce el esfuerzo.</div></li>
+  </ul>
+
+  <div class="hbox azul">
+    💡 <strong>Recuerda:</strong> Tienes el derecho de pedir ayuda a tu tutor, orientador o cualquier adulto de confianza si identificas situaciones de violencia en tus relaciones.
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TAB 2 — DEPORTE Y EMOCIONES
+══════════════════════════════════════ -->
+<div class="sec" id="s-dep">
+<div class="wrap">
+
+  <div class="sec-intro verde">
+    <div class="ico">⚽</div>
+    <div>
+      <strong>Actividades Físicas, Deportivas y Emociones</strong>
+      <p>El deporte no es solo ejercicio — es una herramienta poderosa para gestionar emociones, construir identidad y fomentar vínculos sanos.</p>
+    </div>
+  </div>
+
+  <h2 class="sh"><span class="verde"></span>El deporte como derecho humano</h2>
+  <div class="hbox verde">
+    Todas las personas, sin importar su género, capacidades o contexto, tienen derecho a acceder a actividades físicas y deportivas. El deporte promueve estilos de vida saludables y desarrolla habilidades socioemocionales.
+  </div>
+
+  <h2 class="sh"><span class="verde"></span>¿Qué desarrolla el deporte en ti?</h2>
+  <div class="g3">
+    <div class="card cv"><div class="ci">🧠</div><h3>Autoconocimiento</h3><p>Te permite reconocer tus sensaciones, emociones y límites corporales.</p></div>
+    <div class="card cv"><div class="ci">🤝</div><h3>Trabajo en equipo</h3><p>Cooperación, comunicación y respeto a la diversidad dentro del grupo.</p></div>
+    <div class="card cv"><div class="ci">😤</div><h3>Regulación emocional</h3><p>El ejercicio libera tensión y ayuda a manejar el estrés, la ansiedad y el enojo.</p></div>
+    <div class="card cv"><div class="ci">🎯</div><h3>Resiliencia</h3><p>Aprender a afrontar derrotas y dificultades con actitud positiva.</p></div>
+    <div class="card cv"><div class="ci">👤</div><h3>Identidad</h3><p>Construyes y fortaleces tu imagen corporal y tu sentido de pertenencia.</p></div>
+    <div class="card cv"><div class="ci">🕊️</div><h3>Cultura de paz</h3><p>El deporte sin discriminación promueve la convivencia armónica e igualitaria.</p></div>
+  </div>
+
+  <h2 class="sh"><span class="verde"></span>Deporte, género y no violencia</h2>
+  <ul class="lst">
+    <li><div class="num nv">✓</div><div>Todas las personas tienen el mismo derecho a participar en actividades físicas, independientemente de su identidad de género.</div></li>
+    <li><div class="num nv">✓</div><div>La competencia sana NO incluye burlas, exclusión ni violencia física o verbal.</div></li>
+    <li><div class="num nv">✓</div><div>Reconocer y regular tus emociones durante el juego evita conflictos y construye vínculos saludables.</div></li>
+    <li><div class="num nv">✓</div><div>El respeto por el cuerpo propio y ajeno es la base de cualquier actividad deportiva o recreativa.</div></li>
+  </ul>
+
+  <h2 class="sh"><span class="verde"></span>El bienestar físico forma parte del bienestar integral</h2>
+  <div class="g2">
+    <div class="card cv"><div class="ci">🌙</div><h3>Higiene del sueño</h3><p>Dormir bien mejora el rendimiento físico, mental y emocional. Se recomiendan 8 hrs para adolescentes.</p></div>
+    <div class="card cv"><div class="ci">🥗</div><h3>Alimentación consciente</h3><p>Lo que comes afecta directamente tu energía, concentración y estado de ánimo.</p></div>
+    <div class="card cv"><div class="ci">🚫</div><h3>Prevención de riesgos</h3><p>Reconoce los factores que afectan tu salud: sedentarismo, consumo de sustancias, uso excesivo de pantallas.</p></div>
+    <div class="card cv"><div class="ci">⏸️</div><h3>Descanso activo</h3><p>Los descansos durante el estudio con movimiento mejoran la memoria y el bienestar general.</p></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TAB 3 — ARTE Y AUTODESCUBRIMIENTO
+══════════════════════════════════════ -->
+<div class="sec" id="s-arte">
+<div class="wrap">
+
+  <div class="sec-intro rosa">
+    <div class="ico">🎨</div>
+    <div>
+      <strong>Arte para el Autodescubrimiento</strong>
+      <p>Las actividades artísticas y culturales son una herramienta única para conectar con tus emociones, fortalecer tu identidad y desarrollar pensamiento crítico y creativo.</p>
+    </div>
+  </div>
+
+  <h2 class="sh"><span class="rosa"></span>¿Por qué el arte y la cultura en la escuela?</h2>
+  <div class="hbox rosa">
+    Las actividades artísticas buscan desarrollar el pensamiento crítico, ético, estético y reflexivo. Permiten imaginar otras formas de pensar, hacer y estar en el mundo — y expresar lo que a veces las palabras no pueden decir.
+  </div>
+
+  <h2 class="sh"><span class="rosa"></span>Formas de expresión artística para gestionar emociones</h2>
+  <div class="g2">
+    <div class="card cr"><div class="ci">✏️</div><h3>Dibujo y pintura</h3><p>Externalizar emociones en imágenes ayuda a procesarlas y comprenderlas mejor.</p></div>
+    <div class="card cr"><div class="ci">🎵</div><h3>Música</h3><p>Escuchar o crear música regula el estado emocional y activa la memoria positiva.</p></div>
+    <div class="card cr"><div class="ci">📖</div><h3>Escritura creativa</h3><p>Escribir sobre lo que sientes — poesía, cartas, diarios — es una forma de autoconocimiento.</p></div>
+    <div class="card cr"><div class="ci">💃</div><h3>Danza y movimiento</h3><p>El cuerpo expresa lo que la mente no verbaliza. El movimiento libera tensión.</p></div>
+    <div class="card cr"><div class="ci">🎭</div><h3>Teatro y expresión oral</h3><p>Ponerse en el lugar de otro desarrolla empatía y habilidades de comunicación.</p></div>
+    <div class="card cr"><div class="ci">🏺</div><h3>Artesanía y manualidades</h3><p>La concentración manual activa el estado de "flujo" — relajación profunda y creativa.</p></div>
+  </div>
+
+  <h2 class="sh"><span class="rosa"></span>Progresiones clave</h2>
+  <div class="steps-h">
+    <div class="step-h"><div class="snum sr">1</div><div>Experimenta con diferentes actividades artísticas para <strong>identificar las emociones que te evocan.</strong></div></div>
+    <div class="step-h"><div class="snum sr">2</div><div>Identifica elementos de tu <strong>identidad cultural y personal</strong> y exprésalos a través del arte.</div></div>
+    <div class="step-h"><div class="snum sr">3</div><div>Practica ejercicios de <strong>respiración y corporales</strong> para facilitar la gestión emocional.</div></div>
+    <div class="step-h"><div class="snum sr">4</div><div>Comprende que el arte te permite <strong>conectar con tu corporeidad</strong> y comunicar lo que sientes.</div></div>
+    <div class="step-h"><div class="snum sr">5</div><div>Participa en la creación artística para la <strong>introspección y expresión</strong> individual y colectiva.</div></div>
+  </div>
+
+  <h2 class="sh"><span class="rosa"></span>Tu rueda de emociones — ¿Cómo te sientes hoy?</h2>
+  <p style="font-size:.85rem;color:var(--gris);margin-bottom:.7rem">Toca la emoción que más se acerca a cómo te sientes ahora mismo:</p>
+  <div class="emo-grid">
+    <div class="emo alegria" onclick="pickEmo(this,'alegria','😄','Expresar alegría es contagioso — compártela con alguien hoy.')"><span class="em">😄</span>Alegría</div>
+    <div class="emo calma" onclick="pickEmo(this,'calma','😌','La calma te permite tomar mejores decisiones. ¡Cuídala!')"><span class="em">😌</span>Calma</div>
+    <div class="emo triste" onclick="pickEmo(this,'triste','😔','La tristeza es válida. Habla con alguien de confianza o escribe lo que sientes.')"><span class="em">😔</span>Tristeza</div>
+    <div class="emo enojo" onclick="pickEmo(this,'enojo','😠','El enojo es señal de un límite cruzado. Respira y exprésalo sin dañar a nadie.')"><span class="em">😠</span>Enojo</div>
+    <div class="emo miedo" onclick="pickEmo(this,'miedo','😰','El miedo protege. Identifica su origen y busca apoyo si lo necesitas.')"><span class="em">😰</span>Miedo</div>
+    <div class="emo sorpresa" onclick="pickEmo(this,'sorpresa','😲','La sorpresa abre la mente. ¿Qué aprendizaje viene con este momento?')"><span class="em">😲</span>Sorpresa</div>
+    <div class="emo asco" onclick="pickEmo(this,'asco','😒','El rechazo te dice qué no va con tus valores. Escúchalo.')"><span class="em">😒</span>Rechazo</div>
+    <div class="emo confusion" onclick="pickEmo(this,'confusion','🤔','La confusión precede al aprendizaje. ¡Pregunta sin miedo!')"><span class="em">🤔</span>Confusión</div>
+  </div>
+  <div id="emo-msg">Toca una emoción para ver tu mensaje 👆</div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TAB 4 — ACTIVIDAD
+══════════════════════════════════════ -->
+<div class="sec" id="s-act">
+<div class="wrap">
+
+  <div class="act-shell">
+    <div class="act-top">
+      <h2>✏️ Actividad: Mi Mapa de Conexiones</h2>
+      <p>Integra los tres temas de hoy en una sola creación</p>
+    </div>
+    <div class="act-body">
+
+      <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:1rem;flex-wrap:wrap">
+        <span class="chip am">⏱ 30–35 min</span>
+        <span class="chip a">Individual + Plenaria</span>
+        <span class="chip v">Hoja + colores</span>
+      </div>
+
+      <p style="font-size:.875rem;color:var(--gris);margin-bottom:1.2rem;line-height:1.65">
+        Los tres temas de hoy — <strong>relaciones, deporte y arte</strong> — tienen algo en común: todos impactan en cómo te sientes y cómo te relacionas. Esta actividad los une en un mapa personal y creativo.
+      </p>
+
+      <!-- Paso 1 -->
+      <div class="paso p1">
+        <h3>
+          <span class="badge" style="background:var(--azul2)">PASO 1</span>
+          Mi Red de Relaciones &nbsp;<small style="font-weight:400;color:var(--gris)">(8 min)</small>
+        </h3>
+        <p>En el centro de una hoja escribe tu nombre. Alrededor dibuja círculos con las personas importantes en tu vida. Clasifícalos con colores:</p>
+        <div class="chips-row">
+          <span class="chip a">🔵 Familia</span>
+          <span class="chip v">🟢 Amistades</span>
+          <span class="chip r">🩷 Pareja / Crush</span>
+          <span class="chip am">🟡 Compañeros</span>
+        </div>
+        <p>Para cada persona escribe <em>una sola palabra</em> que describa cómo te hace sentir esa relación.</p>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="paso p2">
+        <h3>
+          <span class="badge" style="background:var(--verde2)">PASO 2</span>
+          Mi Actividad Física Favorita &nbsp;<small style="font-weight:400;color:var(--gris)">(5 min)</small>
+        </h3>
+        <p>En un espacio de la hoja responde estas 3 preguntas rápidas:</p>
+        <ul style="margin:.6rem 0 0 1rem;font-size:.875rem;color:var(--gris);line-height:1.9">
+          <li>¿Qué actividad física hago o me gustaría hacer?</li>
+          <li>¿Qué emoción siento cuando la practico?</li>
+          <li>¿Con quién me gustaría practicarla?</li>
+        </ul>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="paso p3">
+        <h3>
+          <span class="badge" style="background:var(--rosa2)">PASO 3</span>
+          Mi Expresión Artística del Día &nbsp;<small style="font-weight:400;color:var(--gris)">(12 min)</small>
+        </h3>
+        <p>Elige <strong>UNA</strong> forma de expresión artística y crea algo en el espacio restante de tu hoja. Puede ser:</p>
+        <div class="chips-row">
+          <span class="chip r">✏️ Dibujo libre</span>
+          <span class="chip r">📝 Poema de 4 líneas</span>
+          <span class="chip r">🎵 Letra de canción</span>
+          <span class="chip r">🗺️ Mapa mental emocional</span>
+        </div>
+        <p style="margin-top:.5rem">El único requisito: que exprese <strong>cómo te sientes con tus relaciones interpersonales hoy.</strong></p>
+      </div>
+
+      <!-- Paso 4 — Cierre -->
+      <div class="paso p4">
+        <h3>
+          <span class="badge" style="background:var(--ambar2);color:var(--negro)">PASO 4</span>
+          Cierre: La Galería Express &nbsp;<small style="font-weight:400;color:var(--gris)">(5–8 min)</small>
+        </h3>
+        <p>Los alumnos pegan o muestran sus mapas. El tutor facilita:</p>
+        <ul style="margin:.6rem 0 0 1rem;font-size:.875rem;color:var(--gris);line-height:1.9">
+          <li>¿Qué emociones aparecen más en el grupo?</li>
+          <li>¿Qué tienen en común sus relaciones más significativas?</li>
+          <li>¿Qué tipo de expresión artística eligieron más y por qué?</li>
+        </ul>
+        <div class="hbox ambar" style="margin-top:.8rem;font-size:.83rem">
+          💡 <strong>Tip tutor:</strong> No hay respuestas correctas o incorrectas. El objetivo es que cada alumno se conecte con su mundo emocional y lo exprese sin juicio.
+        </div>
+      </div>
+
+      <!-- Checklist -->
+      <h3 style="font-size:.9rem;font-weight:700;color:var(--gris);text-transform:uppercase;letter-spacing:.05em;margin-top:1.4rem;margin-bottom:.4rem">✅ Lista del tutor</h3>
+      <ul class="cklist">
+        <li class="ckitem" onclick="ck(this)"><div class="ckb">✓</div>Mostrar los tres temas de la presentación antes de la actividad</li>
+        <li class="ckitem" onclick="ck(this)"><div class="ckb">✓</div>Repartir hojas blancas y colores / plumones</li>
+        <li class="ckitem" onclick="ck(this)"><div class="ckb">✓</div>Dar música instrumental suave de fondo (opcional — favorece la concentración)</li>
+        <li class="ckitem" onclick="ck(this)"><div class="ckb">✓</div>Respetar el silencio en los primeros 10 minutos de reflexión</li>
+        <li class="ckitem" onclick="ck(this)"><div class="ckb">✓</div>Facilitar el cierre sin forzar a compartir</li>
+        <li class="ckitem" onclick="ck(this)"><div class="ckb">✓</div>Recordar a los alumnos que sus cartas del 28 de mayo están guardadas 📩</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- Conexión con clase anterior -->
+  <div class="hbox azul" style="font-size:.875rem">
+    📌 <strong>Continuidad:</strong> Esta es la Clase 3 del tercer parcial. En la próxima sesión se profundizará en <em>Educación Integral en Sexualidad y Género</em> y se retomará la <em>Brújula Personal</em> del 28 de mayo para evaluar avances.
+  </div>
+
+</div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <button class="bn a" onclick="go('rel')">💬 Relaciones</button>
+  <button class="bn v" onclick="go('dep')">⚽ Deporte</button>
+  <button class="bn r" onclick="go('arte')">🎨 Arte</button>
+  <button class="bn am" onclick="go('act')">✏️ Actividad</button>
+</div>
+
+<script>
+function go(t){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('s-'+t).classList.add('on');
+  document.querySelector('[data-t="'+t+'"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>go(b.dataset.t)));
+
+function ck(el){el.classList.toggle('done')}
+
+const emoMsgs = {
+  alegria: '😄 ¡Qué bueno! Expresar alegría es contagioso — compártela con alguien hoy.',
+  calma:   '😌 La calma te permite tomar mejores decisiones. ¡Cuídala!',
+  triste:  '😔 La tristeza es válida. Habla con alguien de confianza o escribe lo que sientes.',
+  enojo:   '😠 El enojo es señal de un límite cruzado. Respira y exprésalo sin dañar a nadie.',
+  miedo:   '😰 El miedo protege. Identifica su origen y busca apoyo si lo necesitas.',
+  sorpresa:'😲 La sorpresa abre la mente. ¿Qué aprendizaje viene con este momento?',
+  asco:    '😒 El rechazo te dice qué no va con tus valores. Escúchalo.',
+  confusion:'🤔 La confusión precede al aprendizaje. ¡Pregunta sin miedo!'
+};
+
+function pickEmo(el, key, em, msg){
+  document.querySelectorAll('.emo').forEach(e=>{
+    e.className = e.className.replace(/\bsel\b/,'').trim();
+  });
+  el.classList.add('sel');
+  document.getElementById('emo-msg').textContent = msg;
+}
+</script>
+</body>
+</html>
